@@ -11,8 +11,8 @@ Steps
 
 It ends up only about 44 lines of code, plus some steps on Twilio's website.
 
-1) HTML Page
-------------
+HTML Page
+---------
 
 In Sublime Text, make a new HTML file, called `main.html`, with some boilerplate (i.e. common code to start with, not unique to your project).
 
@@ -48,8 +48,8 @@ and then a `button` tag so you can request a phone call.
 
 Open `main.html` in Chrome or Firefox and make sure you can see an `input` and a `button` on the page.
 
-2) Connect Button To Javascript
--------------------------------
+Connect Button To Javascript
+----------------------------
 
 At the bottom of the body, add a `script` tag so you can define a click handler (which will be a Javascript function) for your button.
 
@@ -123,8 +123,8 @@ Status check: so far, your `main.html` file should look like this:
 
 And when you type something into your `input` and then click your `button`, the thing you typed should pop up.
 
-3) Sign Up For Twilio
----------------------
+Sign Up For Twilio
+------------------
 
 We will come back to that HTML page in a bit, once we have a Twilio account.
 
@@ -170,8 +170,8 @@ Test your setup by making a phone call from Twilio's website.
 - You should get a call on your real phone! It should say it's from the phone number that Twilio randomly generated earlier.
 - Feel free to answer it to hear the demo auto-response.
 
-4) Call Yourself From Code
---------------------------
+Call Yourself From Code
+-----------------------
 
 Go back to `main.html` in Sublime Text. It's time to trigger that same phone call from your own web page.
 
@@ -287,8 +287,8 @@ At this point, your `main.html` file should look like this (but with some of you
 
 And when you type your phone number into your `input` and then click your `button`, you should receive a phone call!
 
-5) A Million More Things
-------------------------
+Future Steps
+------------
 
 Possible next steps:
 - delay the call by X seconds so it's not right after you click the button
