@@ -51,7 +51,7 @@ Open `main.html` in Chrome or Firefox and make sure you can see an `input` and a
 Connect Button To Javascript
 ----------------------------
 
-At the bottom of the body, add a `script` tag so you can define a click handler (which will be a Javascript function) for your button.
+At the bottom of the body, add a `script` tag so you can define a click handler (which will be a Javascript function) for your `button`.
 
 ```html
 <script>
@@ -143,26 +143,24 @@ From this dashboard, see Project Info. See these 2 things:
 1) Account SID
 2) Auth Token (for this to be visible, you have to click the dots)
 
-Copy and paste them into Sublime Text, so you have them available later.
+**Copy and paste them into Sublime Text, so you have them available later.**
 
-(When our code makes a request to Twilio to make a phone call for us, we will need to pass in both those things.)
-
-Set up some random new phone number on Twilio. (When Twilio makes calls for you, it will be from this number.)
+Next, set up a random new phone number on Twilio. (When Twilio makes calls for you, it will be from this number.)
 - Under "Phone Numbers", click "Manage Numbers", click "Get Started", click "Get your first Twilio phone number".
 - A pop up should appear.
   - If next to "Voice:" it says "This number can receive incoming calls and make outgoing calls.", click "Choose this Number".
   - If it doesn't say that next to "Voice:", I guess click "Search for a different number". I haven't come across this situation yet though.
-- Copy and paste this phone number to wherever you saved your Account SID and Auth Token. You will need it later as well.
+- **Copy and paste this phone number to wherever you saved your Account SID and Auth Token. You will need it later as well.**
 
 (You can add this number to your Contacts as some funny name. Something you can show the person you're with and be like "Ooh, sorry, gotta take this.")
 
-Before we go back to the code to use our new Twilio account, let's test our setup. Twilio lets you test from within their website.
+Soon we will trigger a phone call from running code. But first, let's test our setup, since Twilio lets you test that straight from their website.
 
-Test your setup by making a phone call from Twilio's website.
+To test your setup by triggering a Twilio phone call to your own phone:
 - In the left menu, click the circle with the dots, click "Runtime", click "API Explorer", click "Calls", click "Make a Call".
 - Under "Parameters", the 2 fields you need to fill in are "TO" (the number to call), and "URL" (says what to do when the call connects).
   - Fill in the "TO" field with your own real phone number.
-  - Fill in the "URL" field with "https://demo.twilio.com/welcome/voice/" (when the call connects, it will use this demo auto-response).
+  - Fill in the "URL" field with https://demo.twilio.com/welcome/voice/ (when the call connects, it will use this demo auto-response).
   - (The "FROM" field is already filled in for you as the randomly generated phone number from earlier.)
 - Note that they show you something called a `curl` command in the panel on the right.
   - You can actually run the `curl` command from your Terminal if you wanted to, but we don't need to.
@@ -190,20 +188,23 @@ First, remove the `alert` line. Our new code will go where it was, underneath `v
 Now, take the Account SID, Auth Token, and random phone number from earlier, and save them as variables so we can use them in the code.
 
 ```javascript
-var TWILIO_ACCOUNT_SID = 'Ab98fa5386ae87611Ab98fa5386ae87611'; // From your Twilio account. Yours won't be the same as mine.
-var TWILIO_AUTH_TOKEN = '43ea04641f5e525f43ea04641f5e525f'; // From your Twilio account. Yours won't be the same as mine.
-var TWILIO_PHONE_NUMBER = '+17742069275'; // From your Twilio account. Yours won't be the same as mine.
+// These are from your Twilio account. Yours won't be the same as mine.
+var TWILIO_ACCOUNT_SID = 'Ab98fa5386ae87611Ab98fa5386ae87611';
+var TWILIO_AUTH_TOKEN = '43ea04641f5e525f43ea04641f5e525f';
+var TWILIO_PHONE_NUMBER = '+17742069275';
 ```
 
-HTTP requests have a target URL (like www.google.com). In this case, it's one I had to look up in Twilio's documentation:
+Then, we need the target URL. HTTP requests are sent to a target URL (like www.google.com).
+
+In this case, it's one I had to look up in Twilio's documentation:
 
 ```javascript
 var callRequestURL = 'https://api.twilio.com/2010-04-01/Accounts/' + TWILIO_ACCOUNT_SID + '/Calls.json';
 ```
 
-Note that it depends on your Account SID. Different people's URL's will be slightly different because their Account SID's are different.
+(Note that it depends on your Account SID. Different people's URL's will be slightly different because their Account SID's are different.)
 
-Next, we define the parameters we send with this request. This is analogous to specifying arguments to a function.
+Next, we define the parameters we send with this request. This is kind of like specifying arguments to a function.
 
 ```javascript
 var myParameters = new URLSearchParams();
@@ -212,9 +213,9 @@ myParameters.set('From', TWILIO_PHONE_NUMBER);
 myParameters.set('Url', 'https://demo.twilio.com/welcome/voice/');
 ```
 
-If you remember from when we made the test phone call from Twilio's website, these are the same parameters we had to fill in then.
+If you remember from when we made the test phone call from Twilio's website, these are the same parameters we had to fill in then ("To", "From", "Url").
 
-One last thing before writing our `fetch` call: "Authorization".
+One last thing before writing our `fetch` call, is Authorization.
 
 If this part seems a little weird, that's ok. Just know it's kind of like "logging in" in order to make a request.
 
@@ -225,7 +226,7 @@ var password = TWILIO_AUTH_TOKEN;
 myHeaders.append('Authorization', 'Basic ' + btoa(username + ":" + password));
 ```
 
-Finally, that we have all the parts we need, we can make the HTTP request by calling `fetch`.
+Finally, now that we have all the parts we need, we can make the HTTP request by calling `fetch`.
 
 ```javascript
 fetch(callRequestURL, {

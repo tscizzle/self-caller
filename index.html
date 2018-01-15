@@ -17,9 +17,10 @@
         var phoneNumberInput = document.getElementById("phone-number-to-call");
         var phoneNumber = phoneNumberInput.value;
 
-        var TWILIO_ACCOUNT_SID = '...'; // fill this in your Twilio account
-        var TWILIO_AUTH_TOKEN = '...'; // fill this in your Twilio account
-        var TWILIO_PHONE_NUMBER = '...'; // fill this in your Twilio account
+        // fill this in your Twilio account
+        var TWILIO_ACCOUNT_SID = '...';
+        var TWILIO_AUTH_TOKEN = '...';
+        var TWILIO_PHONE_NUMBER = '...';
 
         var callRequestURL = 'https://api.twilio.com/2010-04-01/Accounts/' + TWILIO_ACCOUNT_SID + '/Calls.json';
 
