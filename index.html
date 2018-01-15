@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Fake Mom Call</title>
+  </head>
+
+  <body>
+    <input id="phone-number-to-call" placeholder="Phone Number" />
+
+    <button onclick="requestCall()">
+      Call Me
+    </button>
+
+    <script>
+      function requestCall() {
+        var phoneNumberInput = document.getElementById("phone-number-to-call");
+        var phoneNumber = phoneNumberInput.value;
+
+        var TWILIO_ACCOUNT_SID = '...'; // fill this in your Twilio account
+        var TWILIO_AUTH_TOKEN = '...'; // fill this in your Twilio account
+        var TWILIO_PHONE_NUMBER = '...'; // fill this in your Twilio account
+
+        var callRequestURL = 'https://api.twilio.com/2010-04-01/Accounts/' + TWILIO_ACCOUNT_SID + '/Calls.json';
+
+        var myParameters = new URLSearchParams();
+        myParameters.set('To', phoneNumber);
+        myParameters.set('From', TWILIO_PHONE_NUMBER);
+        myParameters.set('Url', 'https://demo.twilio.com/welcome/voice/');
+
+        var myHeaders = new Headers();
+        var username = TWILIO_ACCOUNT_SID;
+        var password = TWILIO_AUTH_TOKEN;
+        myHeaders.append('Authorization', 'Basic ' + btoa(username + ":" + password));
+
+        fetch(callRequestURL, {
+          method: 'POST',
+          body: myParameters,
+          headers: myHeaders,
+        });
+      }
+    </script>
+  </body>
+</html>
