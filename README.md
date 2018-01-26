@@ -105,7 +105,7 @@ Status check: so far, your `main.html` file should look like this:
   <body>
     <input id="phone-number-to-call" placeholder="Phone Number" />
 
-    <button>
+    <button onclick="requestCall()">
       Call Me
     </button>
 
